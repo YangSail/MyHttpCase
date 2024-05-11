@@ -43,13 +43,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         lifecycleScope.launch {
-
+            viewModel.items.collect{
+                text1 = it
+            }
         }
         enableEdgeToEdge()
         setContent {
             MyHttpCaseTheme {
                 Greeting(
-                    name = "Android",
                     model = viewModel
                 )
             }
@@ -60,7 +61,7 @@ class MainActivity : ComponentActivity() {
 var text1 by mutableStateOf("我是可变的数据")
 
 @Composable
-fun Greeting(name: String, model: MainActivityViewModel) {
+fun Greeting( model: MainActivityViewModel) {
     Column(
         modifier = Modifier
             .fillMaxWidth(1f)
@@ -70,7 +71,7 @@ fun Greeting(name: String, model: MainActivityViewModel) {
     ) {
         Button(
             onClick = { /*点击事件*/
-                // butOnclick(model)
+                 model.fetchItems()
             },
             colors = ButtonDefaults.buttonColors(
                 Color.Red,
@@ -86,18 +87,13 @@ fun Greeting(name: String, model: MainActivityViewModel) {
     }
 }
 
-@Composable
-fun butOnclick(model: MainActivityViewModel) {
 
-    val state by model.items.collectAsState()
-
-}
 
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     MyHttpCaseTheme {
-
+       // Greeting(viewModel)
     }
 }
