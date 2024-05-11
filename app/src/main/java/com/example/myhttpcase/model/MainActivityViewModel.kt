@@ -26,8 +26,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(private val apiService: ApiService) : ViewModel() {
     // 使用StateFlow或SharedFlow来暴露数据
-    private val _items = MutableStateFlow<String>("")
-    val items: StateFlow<String> = _items
+    private val _items = MutableStateFlow<List<Flow<String>>>(emptyList() )
+    val items: StateFlow<List<Flow<String>>> = _items
 
     init {
         fetchItems()
@@ -37,6 +37,7 @@ class MainActivityViewModel @Inject constructor(private val apiService: ApiServi
         viewModelScope.launch { // 假设你有一个viewModelScope来处理协程
             val items = apiService.getItems()
             _items.value = items
+
         }
     }
 

@@ -11,5 +11,5 @@ import retrofit2.http.GET
  */
 interface ApiService {
     @GET("/article/list/0/json")
-    suspend fun getItems():  String  // 使用 Flow 作为返回类型
+    suspend fun getItems(): List<Flow<String>> // 使用 Flow 作为返回类型
 }
