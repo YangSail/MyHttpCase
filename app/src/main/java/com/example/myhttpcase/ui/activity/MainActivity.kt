@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.lifecycleScope
 import com.example.myhttpcase.model.MainActivityViewModel
 import com.example.myhttpcase.ui.theme.MyHttpCaseTheme
@@ -43,7 +44,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyHttpCaseTheme {
                 Greeting(
-                    viewModel
+
                 )
             }
         }
@@ -53,7 +54,7 @@ class MainActivity : ComponentActivity() {
 var text1 by mutableStateOf("我是可变的数据")
 
 @Composable
-fun Greeting(viewModel: MainActivityViewModel) {
+fun Greeting(viewModel: MainActivityViewModel = hiltViewModel()) {
     Column(
         modifier = Modifier
             .fillMaxWidth(1f)
@@ -85,6 +86,6 @@ fun Greeting(viewModel: MainActivityViewModel) {
 @Composable
 fun GreetingPreview() {
     MyHttpCaseTheme {
-      // Greeting( )
+     Greeting( )
     }
 }

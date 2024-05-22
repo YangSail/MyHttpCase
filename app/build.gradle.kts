@@ -81,5 +81,5 @@ dependencies {
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.gson)
     implementation(libs.retrofit.kotlin.serialization)
-
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 }
