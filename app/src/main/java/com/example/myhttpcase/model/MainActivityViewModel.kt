@@ -36,7 +36,8 @@ class MainActivityViewModel @Inject constructor(private val apiService: ApiServi
     fun fetchItems() {
         viewModelScope.launch { // 假设你有一个viewModelScope来处理协程
             val items = apiService.getItems()
-            _items.value = items
+
+            _items.value = items.toString()
         }
     }
 

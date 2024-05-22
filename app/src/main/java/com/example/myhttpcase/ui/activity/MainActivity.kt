@@ -14,31 +14,23 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.myhttpcase.model.MainActivityViewModel
 import com.example.myhttpcase.ui.theme.MyHttpCaseTheme
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint//允许被注入
 class MainActivity : ComponentActivity() {
-    val viewModel: MainActivityViewModel by viewModels()
+    private val viewModel: MainActivityViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -51,7 +43,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyHttpCaseTheme {
                 Greeting(
-                    model = viewModel
+                    viewModel
                 )
             }
         }
@@ -61,7 +53,7 @@ class MainActivity : ComponentActivity() {
 var text1 by mutableStateOf("我是可变的数据")
 
 @Composable
-fun Greeting( model: MainActivityViewModel) {
+fun Greeting(viewModel: MainActivityViewModel) {
     Column(
         modifier = Modifier
             .fillMaxWidth(1f)
@@ -71,7 +63,7 @@ fun Greeting( model: MainActivityViewModel) {
     ) {
         Button(
             onClick = { /*点击事件*/
-                 model.fetchItems()
+                viewModel.fetchItems()
             },
             colors = ButtonDefaults.buttonColors(
                 Color.Red,
@@ -89,11 +81,10 @@ fun Greeting( model: MainActivityViewModel) {
 
 
 
-
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     MyHttpCaseTheme {
-       // Greeting(viewModel)
+      // Greeting( )
     }
 }
