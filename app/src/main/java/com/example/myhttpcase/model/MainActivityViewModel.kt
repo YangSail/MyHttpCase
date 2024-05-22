@@ -1,6 +1,7 @@
 package com.example.myhttpcase.model
 
 import android.content.ClipData
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myhttpcase.model.bean.UserData
@@ -36,7 +37,7 @@ class MainActivityViewModel @Inject constructor(private val apiService: ApiServi
     fun fetchItems() {
         viewModelScope.launch { // 假设你有一个viewModelScope来处理协程
             val items = apiService.getItems()
-
+            Log.e("fetchItems", "fetchItems: $items")
             _items.value = items.toString()
         }
     }

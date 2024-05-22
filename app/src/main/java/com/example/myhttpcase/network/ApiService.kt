@@ -1,6 +1,7 @@
 package com.example.myhttpcase.network
 
 import android.content.ClipData.Item
+import com.google.gson.JsonObject
 import kotlinx.coroutines.flow.Flow
 import org.json.JSONObject
 import retrofit2.http.GET
@@ -12,5 +13,5 @@ import retrofit2.http.GET
  */
 interface ApiService {
     @GET("/article/list/0/json")
-    suspend fun getItems():  JSONObject   // 使用 Flow 作为返回类型
+    suspend fun getItems():  JsonObject   // 使用 Flow 作为返回类型
 }
